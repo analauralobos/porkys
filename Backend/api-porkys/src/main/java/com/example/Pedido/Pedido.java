@@ -1,4 +1,4 @@
-package main.java.com.example.Pedido;
+package com.example.Pedido;
 
 public class Pedido {
     

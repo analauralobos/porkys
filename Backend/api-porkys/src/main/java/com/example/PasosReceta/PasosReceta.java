@@ -1,4 +1,4 @@
-package main.java.com.example.PasosReceta;
+package com.example.PasosReceta;
 
 public class PasosReceta {
     

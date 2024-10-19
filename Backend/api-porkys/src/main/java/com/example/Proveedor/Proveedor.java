@@ -1,4 +1,4 @@
-package main.java.com.example.Proveedor;
+package com.example.Proveedor;
 
 public class Proveedor {
     

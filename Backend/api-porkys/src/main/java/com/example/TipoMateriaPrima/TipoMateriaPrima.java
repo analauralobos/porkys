@@ -1,4 +1,4 @@
-package main.java.com.example.TipoMateriaPrima;
+package com.example.TipoMateriaPrima;
 
 public class TipoMateriaPrima {
     

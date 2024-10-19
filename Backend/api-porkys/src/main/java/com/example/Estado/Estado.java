@@ -1,4 +1,4 @@
-package main.java.com.example.Estado;
+package com.example.Estado;
 
 public class Estado {
     

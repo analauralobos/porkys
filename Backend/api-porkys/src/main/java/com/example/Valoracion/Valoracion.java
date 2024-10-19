@@ -1,4 +1,4 @@
-package main.java.com.example.Valoracion;
+package com.example.Valoracion;
 
 public class Valoracion {
     

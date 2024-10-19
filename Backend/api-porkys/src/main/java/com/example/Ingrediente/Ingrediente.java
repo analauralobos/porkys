@@ -1,4 +1,4 @@
-package main.java.com.example.Ingrediente;
+package com.example.Ingrediente;
 
 public class Ingrediente {
     

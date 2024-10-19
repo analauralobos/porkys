@@ -1,4 +1,4 @@
-package main.java.com.example.ProductosPorPedido;
+package com.example.ProductosPorPedido;
 
 public class ProductosPorPedido {
     

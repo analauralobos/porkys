@@ -1,4 +1,4 @@
-package main.java.com.example.TipoPago;
+package com.example.TipoPago;
 
 public class TipoPago {
     
