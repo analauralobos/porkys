@@ -4,9 +4,10 @@ import static spark.Spark.*;
 import org.sql2o.Sql2o;
 import com.example.Cliente.ClienteController;
 import com.example.Compra.CompraController;
-import com.example.Estado.Estado;
 import com.example.Estado.EstadoController;
 import com.example.Ingrediente.IngredienteController;
+import com.example.MateriaPrima.MateriaPrimaController;
+import com.example.PasosReceta.PasosRecetaController;
 import com.example.db.Sql2oDAO;
 
 
@@ -41,6 +42,17 @@ public class App {
         get("porkis/ingredientes/todos", IngredienteController.getTodosIngredientes);
         //post("porkis/ingredientes/crear", IngredienteController.crearIngrediente);        
         //delete("porkis/ingredientes/eliminar/:id", IngredienteController.eliminarIngrediente);
+
+        // MP
+        get("porkis/matprimas/todas", MateriaPrimaController.getTodasMatPrimas);
+        //post("porkis/matprimas/crear", MateriaPrimaController.crearMatPrimas);        
+        //delete("porkis/matprimas/eliminar/:id", MateriaPrimaController.eliminarMatPrima);
+
+        // Pasos Recetas
+        get("porkis/pasosrecetas/todos", PasosRecetaController.getTodosPasosRecetas);
+        //post("porkis/pasosrecetas/crear", PasosRecetaController.crearPasos);        
+        //delete("porkis/pasosrecetas/eliminar/:id", PasosRecetaController.eliminarPasos);
+
 
 
     }
