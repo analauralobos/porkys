@@ -2,14 +2,16 @@ package com.example;
 
 import static spark.Spark.*;
 import org.sql2o.Sql2o;
+
+import com.example.Administrador.AdministradorController;
 import com.example.Cliente.ClienteController;
 import com.example.Compra.CompraController;
 import com.example.Estado.EstadoController;
 import com.example.Ingrediente.IngredienteController;
 import com.example.MateriaPrima.MateriaPrimaController;
 import com.example.PasosReceta.PasosRecetaController;
+import com.example.Pedido.PedidoController;
 import com.example.db.Sql2oDAO;
-
 
 public class App {
     public static void main(String[] args) {
@@ -23,38 +25,44 @@ public class App {
         // Habilitar CORS antes de definir las rutas
         enableCORS("http://localhost:3000", "*", "*");
 
-        // Definir las rutas de tu API
-        get("porkis/clientes/todos", ClienteController.getTodosClientes);
-       // post("porkis/clientes/crear", ClienteController.crearCliente);        
-        //delete("porkis/clientes/eliminar/:id", ClienteController.eliminarCliente);
-
+        // Rutas para Administradores
+        get("porkys/administrador/todos", AdministradorController.getTodosAdmins);
+        post("porkys/administrador/crear", AdministradorController.crearAdmin);        
+        post("porkys/administrador/login", AdministradorController.loginAdmin);
+        // Rutas para Clientes
+        get("porkys/clientes/todos", ClienteController.getTodosClientes);
+        post("porkys/clientes/crear", ClienteController.crearCliente);        
+        post("porkys/clientes/login", ClienteController.loginCliente);
+        
         // Compras
-        get("porkis/compras/todas", CompraController.getTodasCompras);
-        //post("porkis/compras/crear", CompraController.crearCompra);        
-        //delete("porkis/compras/eliminar/:id", CompraController.eliminarCompra);
+        get("porkys/compras/todas", CompraController.getTodasCompras);
+        //post("porkys/compras/crear", CompraController.crearCompra);        
+        //delete("porkys/compras/eliminar/:id", CompraController.eliminarCompra);
 
         // Estados
-        get("porkis/estados/todos", EstadoController.getTodosEstados);
-        //post("porkis/estados/crear", EstadoController.crearEstado);        
-        //delete("porkis/estados/eliminar/:id", EstadoController.eliminarEstado);
+        get("porkys/estados/todos", EstadoController.getTodosEstados);
+        //post("porkys/estados/crear", EstadoController.crearEstado);        
+        //delete("porkys/estados/eliminar/:id", EstadoController.eliminarEstado);
 
         // Ingredientes
-        get("porkis/ingredientes/todos", IngredienteController.getTodosIngredientes);
-        //post("porkis/ingredientes/crear", IngredienteController.crearIngrediente);        
-        //delete("porkis/ingredientes/eliminar/:id", IngredienteController.eliminarIngrediente);
+        get("porkys/ingredientes/todos", IngredienteController.getTodosIngredientes);
+        //post("porkys/ingredientes/crear", IngredienteController.crearIngrediente);        
+        //delete("porkys/ingredientes/eliminar/:id", IngredienteController.eliminarIngrediente);
 
-        // MP
-        get("porkis/matprimas/todas", MateriaPrimaController.getTodasMatPrimas);
-        //post("porkis/matprimas/crear", MateriaPrimaController.crearMatPrimas);        
-        //delete("porkis/matprimas/eliminar/:id", MateriaPrimaController.eliminarMatPrima);
+        // Materia Prima
+        get("porkys/matprimas/todas", MateriaPrimaController.getTodasMatPrimas);
+        //post("porkys/matprimas/crear", MateriaPrimaController.crearMatPrimas);        
+        //delete("porkys/matprimas/eliminar/:id", MateriaPrimaController.eliminarMatPrima);
 
         // Pasos Recetas
-        get("porkis/pasosrecetas/todos", PasosRecetaController.getTodosPasosRecetas);
-        //post("porkis/pasosrecetas/crear", PasosRecetaController.crearPasos);        
-        //delete("porkis/pasosrecetas/eliminar/:id", PasosRecetaController.eliminarPasos);
-
-
-
+        get("porkys/pasosrecetas/todos", PasosRecetaController.getTodosPasosRecetas);
+        //post("porkys/pasosrecetas/crear", PasosRecetaController.crearPasos);        
+        //delete("porkys/pasosrecetas/eliminar/:id", PasosRecetaController.eliminarPasos);
+        
+        // Pedidos
+        get("porkys/pedidos/todos", PedidoController.getTodosPedidos);
+        //post("porkys/pedidos/crear", PedidoController.crearPedido);        
+        //delete("porkys/pedidos/eliminar/:id", PedidoController.eliminarPedido);
     }
 
     // Método para habilitar CORS
@@ -80,4 +88,3 @@ public class App {
         });
     }
 }
-
