@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-10-2024 a las 21:45:23
+-- Tiempo de generación: 21-10-2024 a las 07:37:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `administrador`
+--
+
+CREATE TABLE `administrador` (
+  `id_administrador` int(11) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `apellido` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `rol` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`id_administrador`, `nombre`, `apellido`, `email`, `password`, `rol`) VALUES
+(1, 'Juan', 'Pérez', 'juan.perez@pasteleria.com', 'hashedPassword', 'dueño');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cliente`
 --
 
@@ -34,7 +56,7 @@ CREATE TABLE `cliente` (
   `email_cliente` char(30) DEFAULT NULL,
   `direccion_cliente` char(20) DEFAULT NULL,
   `fecha_nac_cliente` date DEFAULT NULL,
-  `pass_cliente` char(30) DEFAULT NULL
+  `pass_cliente` mediumtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -42,12 +64,12 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_Cliente`, `Nombre_Cliente`, `telefono_cliente`, `email_cliente`, `direccion_cliente`, `fecha_nac_cliente`, `pass_cliente`) VALUES
-(1, 'Juan Perez', '2302456789', 'juanp@gmail.com', 'calle 9 234', '1975-11-25', NULL),
-(2, 'Pedro Gonzalez', '2302987654', 'pedrog@gmail.com', 'calle 11 345', '1963-03-12', NULL),
-(3, 'Lorena Rodriguez', '2302111111', 'lorenar@gmail.com', 'calle 34 y 21', '1987-02-23', NULL),
-(4, 'Emilia Perez', '230222222', 'emiliap@gmail.com', 'calle 44 y 17', '1975-04-23', NULL),
-(5, 'Juan Gonzalez', '2302333333', 'juang@gmail.com', 'calle 5 456', '1998-12-06', NULL),
-(6, 'Roberto Perez', '2302444444', 'robertop@gmail.com', 'calle 6 1345', '1988-07-06', NULL);
+(1, 'Juan Perez', '2302456789', 'juanp@gmail.com', 'calle 9 234', '1975-11-25', '$2a$10$Vwgk/Ch2Fv8VW3JKPTIcYegJ70AVRrdOUoqTVwqKo/4TaWOMrak0m'),
+(2, 'Pedro Gonzalez', '2302987654', 'pedrog@gmail.com', 'calle 11 345', '1963-03-12', '$2a$10$HXJTTTGBb1vkmbG50cGlwe/gPz/r8W1I1FZ/kjNLzl3.5LugVxXTS'),
+(3, 'Lorena Rodriguez', '2302111111', 'lorenar@gmail.com', 'calle 34 y 21', '1987-02-23', '$2a$10$ddUn9.MyAmDxEjPSUQ6Ij.gV1aDBOd/r6Er9FFNijR7YsKXtA/caS'),
+(4, 'Emilia Perez', '230222222', 'emiliap@gmail.com', 'calle 44 y 17', '1975-04-23', '$2a$10$JRiZYRwU2djsrxIwW7BmVOSD.5sDFZ2smlYf9nLZCe.2NYrSgTsYu'),
+(5, 'Juan Gonzalez', '2302333333', 'juang@gmail.com', 'calle 5 456', '1998-12-06', '$2a$10$1H3zacCuNcbUp79Oof5zxujBvkYFifI/8oFPgjgxP0xyN1SrDxsMS'),
+(6, 'Roberto Perez', '2302444444', 'robertop@gmail.com', 'calle 6 1345', '1988-07-06', '$2a$10$9g/roxfdN263IzoRga/EOuJQhbVTdobR9vENbcLwAYU8kWpA.tNzW');
 
 -- --------------------------------------------------------
 
@@ -437,7 +459,7 @@ INSERT INTO `ingrediente` (`id_MateriaPrima`, `id_Producto`, `cantidad`, `unidad
 CREATE TABLE `materia_prima` (
   `id_MateriaPrima` int(11) NOT NULL,
   `Nombre_MP` char(30) DEFAULT NULL,
-  `unidades` char(10) DEFAULT NULL,
+  `unidades` float(10,0) DEFAULT NULL,
   `Fecha_Vto_Proxima` date DEFAULT NULL,
   `Un_de_Medida` varchar(20) NOT NULL,
   `id_TipoMP` int(11) NOT NULL
@@ -448,24 +470,24 @@ CREATE TABLE `materia_prima` (
 --
 
 INSERT INTO `materia_prima` (`id_MateriaPrima`, `Nombre_MP`, `unidades`, `Fecha_Vto_Proxima`, `Un_de_Medida`, `id_TipoMP`) VALUES
-(1, 'Harina Leudante', '3000', '2023-04-28', 'gramos', 1),
-(2, 'Harina 0000', '2000', '2023-05-15', 'gramos', 1),
-(3, 'Huevo', '25', '2023-04-04', 'unidad', 5),
-(4, 'Aceite', '8', '2023-09-07', 'litros', 5),
-(5, 'Crema', '2', '2023-04-05', 'litros', 3),
-(6, 'Chocolate', '7', '2023-05-26', 'unidad', 4),
-(7, 'Cacao', '1000', '2023-07-05', 'gramos', 2),
-(8, 'Azucar', '5000', '2023-08-31', 'gramos', 2),
-(9, 'Maicena', '300', '2023-06-22', 'gramos', 1),
-(10, 'Levadura', '300', '2023-04-15', 'gramos', 1),
-(11, 'Cereza', '34', '2023-03-31', 'unidad', 4),
-(12, 'Manteca', '2500', '2023-05-18', 'gramos', 3),
-(13, 'Dulce de membrillo', '2000', '2023-07-06', 'gramos', 4),
-(14, 'Coco', '500', '2023-05-29', 'gramos', 4),
-(15, 'Dulce de leche', '5000', '2023-04-12', 'gramos', 3),
-(16, 'Leche', '15', '2023-04-11', 'litros', 3),
-(17, 'Limon', '20', '2023-04-29', 'unidad', 5),
-(18, 'Frutillas', '30', '2023-04-12', 'unidad', 5);
+(1, 'Harina Leudante', 3000, '2023-04-28', 'gramos', 1),
+(2, 'Harina 0000', 2000, '2023-05-15', 'gramos', 1),
+(3, 'Huevo', 25, '2023-04-04', 'unidad', 5),
+(4, 'Aceite', 8, '2023-09-07', 'litros', 5),
+(5, 'Crema', 2, '2023-04-05', 'litros', 3),
+(6, 'Chocolate', 7, '2023-05-26', 'unidad', 4),
+(7, 'Cacao', 1000, '2023-07-05', 'gramos', 2),
+(8, 'Azucar', 5000, '2023-08-31', 'gramos', 2),
+(9, 'Maicena', 300, '2023-06-22', 'gramos', 1),
+(10, 'Levadura', 300, '2023-04-15', 'gramos', 1),
+(11, 'Cereza', 34, '2023-03-31', 'unidad', 4),
+(12, 'Manteca', 2500, '2023-05-18', 'gramos', 3),
+(13, 'Dulce de membrillo', 2000, '2023-07-06', 'gramos', 4),
+(14, 'Coco', 500, '2023-05-29', 'gramos', 4),
+(15, 'Dulce de leche', 5000, '2023-04-12', 'gramos', 3),
+(16, 'Leche', 15, '2023-04-11', 'litros', 3),
+(17, 'Limon', 20, '2023-04-29', 'unidad', 5),
+(18, 'Frutillas', 30, '2023-04-12', 'unidad', 5);
 
 -- --------------------------------------------------------
 
@@ -488,7 +510,27 @@ INSERT INTO `pasos_receta` (`id_Producto`, `paso_nro`, `descripcion`) VALUES
 (1, 2, 'mezclar crema y chocolate'),
 (1, 3, 'preparar bizcochuelo'),
 (1, 4, 'cubrir con chocolate y almibar'),
-(1, 5, 'decorar');
+(1, 5, 'decorar'),
+(2, 1, 'mezclar manteca con azucar y h'),
+(2, 2, 'incorporar cacao y harina'),
+(2, 3, 'hornear'),
+(3, 1, 'mezclar manteca con azucar y h'),
+(3, 2, 'añadir harina y enfriar en la'),
+(3, 3, 'pisar membrillo con agua calie'),
+(3, 4, 'decorar'),
+(4, 1, 'mezclar manteca y azucar'),
+(4, 2, 'incorporar harina'),
+(4, 3, 'agregar huevos'),
+(4, 4, 'mezclar coco, huevos y azucar'),
+(4, 5, 'hornear'),
+(5, 1, 'mezclar manteca con azucar y h'),
+(5, 2, 'agregar harina y leche'),
+(5, 3, 'hornear'),
+(5, 4, 'decorar'),
+(6, 1, 'preparar masa'),
+(6, 2, 'batir crema'),
+(6, 3, 'incorporar limon'),
+(6, 4, 'quemar');
 
 -- --------------------------------------------------------
 
@@ -678,6 +720,13 @@ INSERT INTO `valoracion` (`id_Cliente`, `id_Producto`, `fecha_valoracion`, `cant
 --
 
 --
+-- Indices de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD PRIMARY KEY (`id_administrador`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
@@ -715,7 +764,6 @@ ALTER TABLE `materia_prima`
 -- Indices de la tabla `pasos_receta`
 --
 ALTER TABLE `pasos_receta`
-  ADD PRIMARY KEY (`paso_nro`),
   ADD KEY `id_Producto` (`id_Producto`);
 
 --
@@ -764,6 +812,16 @@ ALTER TABLE `tipo_pago`
 ALTER TABLE `valoracion`
   ADD KEY `id_Cliente` (`id_Cliente`),
   ADD KEY `id_Producto` (`id_Producto`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
