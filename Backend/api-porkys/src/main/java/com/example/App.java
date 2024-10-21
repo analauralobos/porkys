@@ -11,6 +11,12 @@ import com.example.Ingrediente.IngredienteController;
 import com.example.MateriaPrima.MateriaPrimaController;
 import com.example.PasosReceta.PasosRecetaController;
 import com.example.Pedido.PedidoController;
+import com.example.Producto.ProductoController;
+import com.example.ProductosPorPedido.ProductosPorPedidoController;
+import com.example.Proveedor.ProveedorController;
+import com.example.TipoMateriaPrima.TipoMateriaPrimaController;
+import com.example.TipoPago.TipoPagoController;
+import com.example.Valoracion.ValoracionController;
 import com.example.db.Sql2oDAO;
 
 public class App {
@@ -63,6 +69,37 @@ public class App {
         get("porkys/pedidos/todos", PedidoController.getTodosPedidos);
         //post("porkys/pedidos/crear", PedidoController.crearPedido);        
         //delete("porkys/pedidos/eliminar/:id", PedidoController.eliminarPedido);
+
+        // Productos
+        get("porkys/productos/todos", ProductoController.getTodosProductos);
+        //post("porkys/productos/crear", ProductoController.crearProducto);        
+        //delete("porkys/productos/eliminar/:id", ProductoController.eliminarProducto);
+
+        // ProductosXPedido
+        get("porkys/productosXpedido/todos", ProductosPorPedidoController.getTodosProductosXpedido);
+        //post("porkys/productosXpedido/crear", ProductosPorPedidoController.crearProductosXpedido);        
+        //delete("porkys/productosXpedido/eliminar/:id", ProductosPorPedidoController.eliminarProductosXpedido);
+
+        // Proveedor
+        get("porkys/proveedor/todos", ProveedorController.getTodosProveedor);
+        //post("porkys/proveedor/crear", ProveedorController.crearProveedor);        
+        //delete("porkys/proveedor/eliminar/:id", ProveedorController.eliminarProveedor);
+
+        // Tipo MP
+        get("porkys/tipomp/todos", TipoMateriaPrimaController.getTodosTipoMP);
+        //post("porkys/tipomp/crear", ProveedorController.crearProveedor);        
+        //delete("porkys/tipomp/eliminar/:id", ProveedorController.eliminarProveedor);
+
+        // Tipo pago
+        get("porkys/tipopago/todos", TipoPagoController.getTodosTipoPago);
+        //post("porkys/tipopago/crear", TipoPagoController.crearTipoPago);        
+        //delete("porkys/tipopago/eliminar/:id", TipoPagoController.eliminarTipoPago);
+
+        // Valoraciones
+        get("porkys/valoracion/todas", ValoracionController.getTodasValoraciones);
+        //post("porkys/valoracion/crear", ValoracionController.crearValoracion);        
+        //delete("porkys/valoracion/eliminar/:id", ValoracionController.eliminarValoracion);
+
     }
 
     // Método para habilitar CORS
