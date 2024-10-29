@@ -46,8 +46,7 @@ public class AdministradorController {
         response.type("application/json");
         try {
             Administrador loginAdmin = gson.fromJson(request.body(), Administrador.class);
-            String token = AuthService.loginAdmin(loginAdmin.getEmail(), loginAdmin.getPassword()); // Debes implementar
-                                                                                                    // este método
+            String token = AuthService.loginAdmin(loginAdmin.getEmail(), loginAdmin.getPassword());
             if (token != null) {
                 response.status(200);
                 return gson.toJson("Token: " + token);
