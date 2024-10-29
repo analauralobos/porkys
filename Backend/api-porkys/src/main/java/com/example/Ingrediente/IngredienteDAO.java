@@ -2,7 +2,6 @@ package com.example.Ingrediente;
 
 import java.util.List;
 import org.sql2o.Connection;
-
 import com.example.db.Sql2oDAO;
 
 public class IngredienteDAO {
@@ -13,6 +12,20 @@ public class IngredienteDAO {
             return con.createQuery(selectAllSQL).executeAndFetch(Ingrediente.class);
         } catch (Exception e) {
             System.err.println("Error al ejecutar la query: " + e.getMessage());
+            return null;
+        }
+    }
+
+    // Método para seleccionar un ingrediente por id
+    public List<Ingrediente> selectIngredienteId(int id_Producto) {
+        String selectSQL = "SELECT * FROM ingrediente WHERE id_Producto = :id_Producto;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {            
+            List<Ingrediente> ingredientes = con.createQuery(selectSQL)
+                    .addParameter("id_Producto", id_Producto)
+                    .executeAndFetch(Ingrediente.class);
+            return ingredientes;
+        } catch (Exception e) {
+            System.err.println("Error al seleccionar los ingredientes: " + e.getMessage());
             return null;
         }
     }

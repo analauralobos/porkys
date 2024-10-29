@@ -1,6 +1,8 @@
 package com.example.Ingrediente;
 
 import java.util.List;
+
+import com.example.Producto.Producto;
 import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
@@ -22,6 +24,29 @@ public class IngredienteController {
             return new Gson().toJson("Error controlador: " + e.getMessage());
         }
     };
+    // Ver ingredientes por id del producto
+    public static Route getIngredienteId = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            int idProducto = Integer.parseInt(request.params(":id"));
+            List<Ingrediente> ingredientes = ingredienteDAO.selectIngredienteId(idProducto);
+
+            if (ingredientes != null && !ingredientes.isEmpty()) {
+                response.status(200);
+                return gson.toJson(ingredientes);
+            } else {
+                response.status(404);
+                return gson.toJson("No se encontraron ingredientes para el producto especificado.");
+            }
+        } catch (NumberFormatException e) {
+            response.status(400);
+            return gson.toJson("ID de producto inválido");
+        } catch (Exception e) {
+            response.status(500);
+            return gson.toJson("Error al seleccionar los ingredientes: " + e.getMessage());
+        }
+    };
+
     // Crear nuevo ingrediente
     public static Route crearIngrediente = (Request request, Response response) -> {
         response.type("application/json");

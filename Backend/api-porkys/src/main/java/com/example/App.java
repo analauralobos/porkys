@@ -59,9 +59,10 @@ public class App {
 
         // Ingredientes
         get("porkys/ingredientes/todos", IngredienteController.getTodosIngredientes);
+        get("porkys/ingredientes/detalles/:id", IngredienteController.getIngredienteId);
         post("porkys/ingredientes/crear", IngredienteController.crearIngrediente);
         delete("porkys/ingredientes/eliminar", IngredienteController.eliminarIngrediente);
-        post("porkys/ingredientes/modificar", IngredienteController.modificarIngrediente);
+        put("porkys/ingredientes/modificar", IngredienteController.modificarIngrediente);
 
         // Materia Prima
         get("porkys/matprima/todas", MateriaPrimaController.getTodasMatPrimas);
@@ -83,6 +84,7 @@ public class App {
 
         // Productos
         get("porkys/productos/todos", ProductoController.getTodosProductos);
+        get("porkys/productos/detalles/:id", ProductoController.getProductoId);
         post("porkys/productos/crear", ProductoController.crearProducto);
         post("porkys/productos/modificar/:id", ProductoController.modificarProducto);
         delete("porkys/productos/eliminar/:id", ProductoController.eliminarProducto);

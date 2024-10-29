@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
-import AdminPage from "./pages/AdminPage";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import HomePage from "./pages/HomePage";
 import Login from "./components/login/Login";
-import Productos from "./pages/ProductoPage"
-
+import Productos from "./pages/ProductoPage";
+import AdminHomePage from "./pages/AdminHomePage";
+import ProductForm from "./components/productos/ProductForm";
+import DetailProduct from "./components/productos/ProductDetail"
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!localStorage.getItem("token")
@@ -22,8 +20,9 @@ function App() {
   };
 
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route
           path="/login"
           element={
@@ -38,16 +37,32 @@ function App() {
           path="/admin"
           element={
             isAuthenticated ? (
-              <AdminPage onLogout={handleLogout} />
+              <AdminHomePage onLogout={handleLogout} />
             ) : (
-              <Navigate to="/login" />
+              <Navigate to="/" />
             )
           }
         />
-        <Route path="/productos" element={<Productos />} />  
-        
+        <Route
+          path="/productos"
+          element={
+            isAuthenticated ? (
+              <Productos onLogout={handleLogout} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        <Route
+          path="/form-product"
+          element={isAuthenticated ? <ProductForm /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/detail-product/:id"
+          element={isAuthenticated ? <DetailProduct /> : <Navigate to="/productos" />}
+        />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 

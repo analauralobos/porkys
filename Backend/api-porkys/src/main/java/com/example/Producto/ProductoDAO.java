@@ -16,6 +16,20 @@ public class ProductoDAO {
         }
     }
 
+    // Método para seleccionar un producto por id
+    public Producto selectProductoId(int id_Producto) {
+        String selectSQL = "SELECT * FROM producto WHERE id_Producto = :id_Producto;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {            
+            Producto producto = con.createQuery(selectSQL)
+                    .addParameter("id_Producto", id_Producto) 
+                    .executeAndFetchFirst(Producto.class); 
+            return producto; 
+        } catch (Exception e) {
+            System.err.println("Error al seleccionar el producto: " + e.getMessage());
+            return null; 
+        }
+    }
+
     // Método para crear un nuevo producto
     public boolean crearProducto(Producto producto) {
         String insertSQL = "INSERT INTO producto (Nombre_Producto, precio_vta, cant_porciones, descripcion_producto) VALUES (:Nombre_Producto, :precio_vta, :cant_porciones, :descripcion_producto);";

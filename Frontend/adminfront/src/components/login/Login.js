@@ -12,8 +12,8 @@ function Login({ onLoginSuccess }) {
         
         try {
             const token = await loginAdmin({ email, password });
-            localStorage.setItem('token', token); // Almacena el token en el localStorage
-            onLoginSuccess(); // Notifica al padre que el login fue exitoso
+            localStorage.setItem('token', token); 
+            onLoginSuccess(); 
         } catch (err) {
             setError(err.message || "Error al iniciar sesión");
         }

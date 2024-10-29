@@ -22,6 +22,29 @@ public class ProductoController {
             return new Gson().toJson("Error controlador: " + e.getMessage());
         }
     };
+
+    // Ver un producto por id
+    public static Route getProductoId = (Request request, Response response) -> {
+        response.type("application/json");
+        try {            
+            int idProducto = Integer.parseInt(request.params(":id"));            
+            Producto producto = productoDAO.selectProductoId(idProducto);
+            if (producto != null) {
+                response.status(200);
+                return gson.toJson(producto); 
+            } else {
+                response.status(404);
+                return gson.toJson("Producto no encontrado");
+            }
+        } catch (NumberFormatException e) {
+            response.status(400);
+            return gson.toJson("ID de producto inválido");
+        } catch (Exception e) {
+            response.status(500);
+            return gson.toJson("Error al seleccionar el producto: " + e.getMessage());
+        }
+    };
+
     // Crear nuevo producto
     public static Route crearProducto = (Request request, Response response) -> {
         response.type("application/json");
