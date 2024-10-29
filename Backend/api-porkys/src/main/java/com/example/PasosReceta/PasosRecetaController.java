@@ -1,6 +1,8 @@
 package com.example.PasosReceta;
 
 import java.util.List;
+
+import com.example.Ingrediente.Ingrediente;
 import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
@@ -20,6 +22,29 @@ public class PasosRecetaController {
         } catch (Exception e) {
             response.status(500);
             return new Gson().toJson("Error controlador: " + e.getMessage());
+        }
+    };
+
+    // Ver pasos receta por id del producto
+    public static Route getPasosRecetasId = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            int idProducto = Integer.parseInt(request.params(":id"));
+            List<PasosReceta> receta = pasosDAO.selectRecetaId(idProducto);
+
+            if (receta != null && !receta.isEmpty()) {
+                response.status(200);
+                return gson.toJson(receta);
+            } else {
+                response.status(404);
+                return gson.toJson("No se encontraron la receta para el producto especificado.");
+            }
+        } catch (NumberFormatException e) {
+            response.status(400);
+            return gson.toJson("ID de producto inválido");
+        } catch (Exception e) {
+            response.status(500);
+            return gson.toJson("Error al seleccionar los pasos: " + e.getMessage());
         }
     };
 

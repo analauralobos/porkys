@@ -15,7 +15,19 @@ public class PasosRecetaDAO {
             return null;
         }
     }
-
+    // Método para seleccionar una receta por id
+    public List<PasosReceta> selectRecetaId(int id_Producto) {
+        String selectSQL = "SELECT * FROM pasos_receta WHERE id_Producto = :id_Producto;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {            
+            List<PasosReceta> receta = con.createQuery(selectSQL)
+                    .addParameter("id_Producto", id_Producto)
+                    .executeAndFetch(PasosReceta.class);
+            return receta;
+        } catch (Exception e) {
+            System.err.println("Error al seleccionar los receta: " + e.getMessage());
+            return null;
+        }
+    }
     // Método para registrar un nuevo paso
     public boolean crearPasos(PasosReceta pasosReceta) {
         String insertSQL = "INSERT INTO pasos_receta (id_Producto, paso_nro, descripcion) VALUES (:id_Producto, :paso_nro, :descripcion);";

@@ -1,7 +1,6 @@
 package com.example.MateriaPrima;
 
 import java.util.List;
-
 import org.sql2o.Connection;
 import com.example.db.Sql2oDAO;
 
@@ -13,6 +12,20 @@ public class MateriaPrimaDAO {
             return con.createQuery(selectAllSQL).executeAndFetch(MateriaPrima.class);
         } catch (Exception e) {
             System.err.println("Error al ejecutar la query: " + e.getMessage());
+            return null;
+        }
+    }
+
+    // Método para seleccionar una mp por id
+    public MateriaPrima selectMPId(int id_MateriaPrima) {
+        String selectSQL = "SELECT * FROM materia_prima WHERE id_MateriaPrima = :id_MateriaPrima;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            MateriaPrima materiaPrima = con.createQuery(selectSQL)
+                    .addParameter("id_MateriaPrima", id_MateriaPrima)
+                    .executeAndFetchFirst(MateriaPrima.class); // Cambiado a executeAndFetchFirst
+            return materiaPrima;
+        } catch (Exception e) {
+            System.err.println("Error al seleccionar la materia prima: " + e.getMessage());
             return null;
         }
     }

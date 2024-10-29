@@ -66,12 +66,14 @@ public class App {
 
         // Materia Prima
         get("porkys/matprima/todas", MateriaPrimaController.getTodasMatPrimas);
+        get("porkys/matprima/detalles/:id", MateriaPrimaController.getMatPrimasId);
         post("porkys/matprima/crear", MateriaPrimaController.crearMateriaPrima);
         delete("porkys/matprima/eliminar/:id", MateriaPrimaController.eliminarMateriaPrima);
         put("porkys/matprima/modificar/:id", MateriaPrimaController.modificarMateriaPrima);
 
         // Pasos Recetas
         get("porkys/pasosrecetas/todos", PasosRecetaController.getTodosPasosRecetas);
+        get("porkys/pasosrecetas/detalles/:id", PasosRecetaController.getPasosRecetasId);
         post("porkys/pasosrecetas/crear", PasosRecetaController.crearPasos);
         delete("porkys/pasosrecetas/eliminar/:id_Producto/:paso_nro", PasosRecetaController.eliminarPaso);
         post("porkys/pasosrecetas/modificar/:id_Producto/:paso_nro", PasosRecetaController.modificarPaso);

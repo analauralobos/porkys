@@ -21,6 +21,29 @@ public class MateriaPrimaController {
             return new Gson().toJson("Error controlador: " + e.getMessage());
         }
     };
+    // Ver materia prima por id de materia prima
+    public static Route getMatPrimasId = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            int idMP = Integer.parseInt(request.params(":id"));
+            MateriaPrima materiaPrima = materiaPrimaDAO.selectMPId(idMP);
+
+            if (materiaPrima != null) {
+                response.status(200);
+                return gson.toJson(materiaPrima);
+            } else {
+                response.status(404);
+                return gson.toJson("No se encontró una materia prima para el ID especificado.");
+            }
+        } catch (NumberFormatException e) {
+            response.status(400);
+            return gson.toJson("ID de materia prima inválido");
+        } catch (Exception e) {
+            response.status(500);
+            return gson.toJson("Error al obtener la materia prima: " + e.getMessage());
+        }
+    };
+
     // Crear nueva materia prima
     public static Route crearMateriaPrima = (Request request, Response response) -> {
         response.type("application/json");
