@@ -41,7 +41,7 @@ public class AuthService {
     private static String generateTokenCliente(Cliente cliente) {
         Claims claims = Jwts.claims().setSubject(cliente.getEmail_cliente());
         claims.put("nombre", cliente.getNombre_Cliente());
-        claims.put("id", cliente.getId_Cliente()); // Suponiendo que tienes un ID en Cliente
+        claims.put("id", cliente.getId_Cliente()); 
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + EXPIRATION_TIME);
@@ -58,7 +58,7 @@ public class AuthService {
     private static String generateTokenAdmin(Administrador admin) {
         Claims claims = Jwts.claims().setSubject(admin.getEmail());
         claims.put("nombre", admin.getNombre());
-        claims.put("id", admin.getId_administrador()); // Suponiendo que tienes un ID en Admin
+        claims.put("id", admin.getId_administrador()); 
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + EXPIRATION_TIME);

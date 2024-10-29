@@ -33,72 +33,90 @@ public class App {
 
         // Rutas para Administradores
         get("porkys/administrador/todos", AdministradorController.getTodosAdmins);
-        post("porkys/administrador/crear", AdministradorController.crearAdmin);        
+        post("porkys/administrador/crear", AdministradorController.crearAdmin);
         post("porkys/administrador/login", AdministradorController.loginAdmin);
+        put("porkys/administrador/modificar", AdministradorController.modificarAdmin);
+        delete("porkys/administrador/eliminar/:id", AdministradorController.eliminarAdmin);
+
         // Rutas para Clientes
         get("porkys/clientes/todos", ClienteController.getTodosClientes);
-        post("porkys/clientes/crear", ClienteController.crearCliente);        
+        post("porkys/clientes/crear", ClienteController.crearCliente);
         post("porkys/clientes/login", ClienteController.loginCliente);
-        
+        post("porkys/clientes/modificar", ClienteController.modificarCliente);
+        delete("porkys/clientes/eliminar/:id_cliente", ClienteController.eliminarCliente);
+
         // Compras
         get("porkys/compras/todas", CompraController.getTodasCompras);
-        //post("porkys/compras/crear", CompraController.crearCompra);        
-        //delete("porkys/compras/eliminar/:id", CompraController.eliminarCompra);
+        post("porkys/compras/crear", CompraController.crearCompra);
+        put("porkys/compras/modificar", CompraController.modificarCompra);
+        delete("porkys/compras/eliminar/:id_compra", CompraController.eliminarCompra);
 
         // Estados
         get("porkys/estados/todos", EstadoController.getTodosEstados);
-        //post("porkys/estados/crear", EstadoController.crearEstado);        
-        //delete("porkys/estados/eliminar/:id", EstadoController.eliminarEstado);
+        post("porkys/estados/crear", EstadoController.crearEstado);
+        delete("porkys/estados/eliminar/:id", EstadoController.eliminarEstado);
+        post("porkys/estados/modificar/:id", EstadoController.modificarEstado);
 
         // Ingredientes
         get("porkys/ingredientes/todos", IngredienteController.getTodosIngredientes);
-        //post("porkys/ingredientes/crear", IngredienteController.crearIngrediente);        
-        //delete("porkys/ingredientes/eliminar/:id", IngredienteController.eliminarIngrediente);
+        post("porkys/ingredientes/crear", IngredienteController.crearIngrediente);
+        delete("porkys/ingredientes/eliminar", IngredienteController.eliminarIngrediente);
+        post("porkys/ingredientes/modificar", IngredienteController.modificarIngrediente);
 
         // Materia Prima
-        get("porkys/matprimas/todas", MateriaPrimaController.getTodasMatPrimas);
-        //post("porkys/matprimas/crear", MateriaPrimaController.crearMatPrimas);        
-        //delete("porkys/matprimas/eliminar/:id", MateriaPrimaController.eliminarMatPrima);
+        get("porkys/matprima/todas", MateriaPrimaController.getTodasMatPrimas);
+        post("porkys/matprima/crear", MateriaPrimaController.crearMateriaPrima);
+        delete("porkys/matprima/eliminar/:id", MateriaPrimaController.eliminarMateriaPrima);
+        put("porkys/matprima/modificar/:id", MateriaPrimaController.modificarMateriaPrima);
 
         // Pasos Recetas
         get("porkys/pasosrecetas/todos", PasosRecetaController.getTodosPasosRecetas);
-        //post("porkys/pasosrecetas/crear", PasosRecetaController.crearPasos);        
-        //delete("porkys/pasosrecetas/eliminar/:id", PasosRecetaController.eliminarPasos);
-        
+        post("porkys/pasosrecetas/crear", PasosRecetaController.crearPasos);
+        delete("porkys/pasosrecetas/eliminar/:id_Producto/:paso_nro", PasosRecetaController.eliminarPaso);
+        post("porkys/pasosrecetas/modificar/:id_Producto/:paso_nro", PasosRecetaController.modificarPaso);
+
         // Pedidos
         get("porkys/pedidos/todos", PedidoController.getTodosPedidos);
-        //post("porkys/pedidos/crear", PedidoController.crearPedido);        
-        //delete("porkys/pedidos/eliminar/:id", PedidoController.eliminarPedido);
+        post("porkys/pedidos/crear", PedidoController.crearPedido);
+        post("porkys/pedidos/modificar/:id", PedidoController.modificarPedido);
+        delete("porkys/pedidos/eliminar/:id", PedidoController.eliminarPedido);
 
         // Productos
         get("porkys/productos/todos", ProductoController.getTodosProductos);
-        //post("porkys/productos/crear", ProductoController.crearProducto);        
-        //delete("porkys/productos/eliminar/:id", ProductoController.eliminarProducto);
+        post("porkys/productos/crear", ProductoController.crearProducto);
+        post("porkys/productos/modificar/:id", ProductoController.modificarProducto);
+        delete("porkys/productos/eliminar/:id", ProductoController.eliminarProducto);
 
         // ProductosXPedido
         get("porkys/productosXpedido/todos", ProductosPorPedidoController.getTodosProductosXpedido);
-        //post("porkys/productosXpedido/crear", ProductosPorPedidoController.crearProductosXpedido);        
-        //delete("porkys/productosXpedido/eliminar/:id", ProductosPorPedidoController.eliminarProductosXpedido);
+        post("porkys/productosXpedido/crear", ProductosPorPedidoController.crearProductoXPedido);
+        post("porkys/productosXpedido/modificar/:id", ProductosPorPedidoController.modificarProductoXPedido);
+        delete("porkys/productosXpedido/eliminar/:id", ProductosPorPedidoController.eliminarProductoXPedido);
 
         // Proveedor
         get("porkys/proveedor/todos", ProveedorController.getTodosProveedor);
-        //post("porkys/proveedor/crear", ProveedorController.crearProveedor);        
-        //delete("porkys/proveedor/eliminar/:id", ProveedorController.eliminarProveedor);
+        post("porkys/proveedor/crear", ProveedorController.crearProveedor);
+        post("porkys/proveedor/modificar/:id", ProveedorController.modificarProveedor);
+        delete("porkys/proveedor/eliminar/:id", ProveedorController.eliminarProveedor);
 
         // Tipo MP
         get("porkys/tipomp/todos", TipoMateriaPrimaController.getTodosTipoMP);
-        //post("porkys/tipomp/crear", ProveedorController.crearProveedor);        
-        //delete("porkys/tipomp/eliminar/:id", ProveedorController.eliminarProveedor);
+        post("porkys/tipomp/crear", TipoMateriaPrimaController.crearTipoMateriaPrima);
+        post("porkys/tipomp/modificar/:id", TipoMateriaPrimaController.modificarTipoMateriaPrima);
+        delete("porkys/tipomp/eliminar/:id", TipoMateriaPrimaController.eliminarTipoMateriaPrima);
 
         // Tipo pago
         get("porkys/tipopago/todos", TipoPagoController.getTodosTipoPago);
-        //post("porkys/tipopago/crear", TipoPagoController.crearTipoPago);        
-        //delete("porkys/tipopago/eliminar/:id", TipoPagoController.eliminarTipoPago);
+        post("porkys/tipopago/crear", TipoPagoController.crearTipoPago);
+        post("porkys/tipopago/modificar/:id", TipoPagoController.modificarTipoPago);
+        delete("porkys/tipopago/eliminar/:id", TipoPagoController.eliminarTipoPago);
 
         // Valoraciones
         get("porkys/valoracion/todas", ValoracionController.getTodasValoraciones);
-        //post("porkys/valoracion/crear", ValoracionController.crearValoracion);        
-        //delete("porkys/valoracion/eliminar/:id", ValoracionController.eliminarValoracion);
+        post("porkys/valoracion/crear", ValoracionController.crearValoracion);
+        post("porkys/valoracion/modificar", ValoracionController.modificarValoracion);
+        delete("porkys/valoracion/eliminar/:id_cliente/:id_producto/:fecha_valoracion",
+                ValoracionController.eliminarValoracion);
 
     }
 

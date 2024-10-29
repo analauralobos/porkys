@@ -26,14 +26,14 @@ public class ClienteDAO {
         try (Connection con = Sql2oDAO.getSql2o().open()) {
             String hashedPassword = BCrypt.hashpw(cliente.getPass_cliente(), BCrypt.gensalt());
             con.createQuery(insertSQL)
-                .addParameter("idCliente", cliente.getId_Cliente())
-                .addParameter("nombre", cliente.getNombre_Cliente())
-                .addParameter("telefono", cliente.getTelefono_cliente())
-                .addParameter("email", cliente.getEmail_cliente())
-                .addParameter("direccion", cliente.getDireccion_cliente())
-                .addParameter("fecha_nac", cliente.getFecha_nac_cliente())
-                .addParameter("password", hashedPassword) // Almacena la contraseña encriptada
-                .executeUpdate();
+                    .addParameter("idCliente", cliente.getId_Cliente())
+                    .addParameter("nombre", cliente.getNombre_Cliente())
+                    .addParameter("telefono", cliente.getTelefono_cliente())
+                    .addParameter("email", cliente.getEmail_cliente())
+                    .addParameter("direccion", cliente.getDireccion_cliente())
+                    .addParameter("fecha_nac", cliente.getFecha_nac_cliente())
+                    .addParameter("password", hashedPassword) // Almacena la contraseña encriptada
+                    .executeUpdate();
             return true;
         } catch (Exception e) {
             System.err.println("Error al registrar el cliente: " + e.getMessage());
@@ -46,8 +46,8 @@ public class ClienteDAO {
         String selectSQL = "SELECT * FROM cliente WHERE email_cliente = :email;";
         try (Connection con = Sql2oDAO.getSql2o().open()) {
             Cliente cliente = con.createQuery(selectSQL)
-                .addParameter("email", email)
-                .executeAndFetchFirst(Cliente.class);
+                    .addParameter("email", email)
+                    .executeAndFetchFirst(Cliente.class);
             return Optional.ofNullable(cliente);
         } catch (Exception e) {
             System.err.println("Error al buscar el cliente: " + e.getMessage());
@@ -64,6 +64,37 @@ public class ClienteDAO {
         }
         return false; // El cliente no existe o la contraseña es incorrecta
     }
+
+    // Método para modificar un cliente
+    public boolean modificarCliente(Cliente cliente) {
+        String updateSQL = "UPDATE cliente SET Nombre_Cliente = :nombre, telefono_cliente = :telefono, email_cliente = :email, direccion_cliente = :direccion, fecha_nac_cliente = :fecha_nac WHERE id_Cliente = :idCliente;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            con.createQuery(updateSQL)
+                    .addParameter("idCliente", cliente.getId_Cliente())
+                    .addParameter("nombre", cliente.getNombre_Cliente())
+                    .addParameter("telefono", cliente.getTelefono_cliente())
+                    .addParameter("email", cliente.getEmail_cliente())
+                    .addParameter("direccion", cliente.getDireccion_cliente())
+                    .addParameter("fecha_nac", cliente.getFecha_nac_cliente())
+                    .executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al modificar el cliente: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Método para eliminar un cliente
+    public boolean eliminarCliente(int id_Cliente) {
+        String deleteSQL = "DELETE FROM cliente WHERE id_Cliente = :idCliente;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            con.createQuery(deleteSQL)
+                    .addParameter("idCliente", id_Cliente)
+                    .executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al eliminar el cliente: " + e.getMessage());
+            return false;
+        }
+    }
 }
-
-

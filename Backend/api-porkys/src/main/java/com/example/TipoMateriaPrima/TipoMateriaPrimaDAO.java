@@ -16,4 +16,48 @@ public class TipoMateriaPrimaDAO {
             return null;
         }
     }
+
+    // Método para crear un nuevo tipo de materia prima
+    public boolean crearTipoMateriaPrima(TipoMateriaPrima tipoMP) {
+        String insertSQL = "INSERT INTO tipo_materiaprima (descripcion_TipoMP) VALUES (:descripcion_TipoMP);";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            con.createQuery(insertSQL)
+                    .addParameter("descripcion_TipoMP", tipoMP.getDescripcion_TipoMP())
+                    .executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al registrar el tipo de materia prima: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Método para modificar un tipo de materia prima
+    public boolean modificarTipoMateriaPrima(TipoMateriaPrima tipoMP) {
+        String updateSQL = "UPDATE tipo_materiaprima SET descripcion_TipoMP = :descripcion_TipoMP WHERE id_TipoMP = :id_TipoMP;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            con.createQuery(updateSQL)
+                    .addParameter("id_TipoMP", tipoMP.getId_TipoMP())
+                    .addParameter("descripcion_TipoMP", tipoMP.getDescripcion_TipoMP())
+                    .executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al modificar el tipo de materia prima: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Método para eliminar un tipo de materia prima
+    public boolean eliminarTipoMateriaPrima(int id_TipoMP) {
+        String deleteSQL = "DELETE FROM tipo_materiaprima WHERE id_TipoMP = :id_TipoMP;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            con.createQuery(deleteSQL)
+                    .addParameter("id_TipoMP", id_TipoMP)
+                    .executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al eliminar el tipo de materia prima: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

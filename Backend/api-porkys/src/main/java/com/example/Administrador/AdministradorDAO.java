@@ -1,4 +1,5 @@
 package com.example.Administrador;
+
 import org.sql2o.Connection;
 import com.example.db.Sql2oDAO;
 import org.mindrot.jbcrypt.BCrypt;
@@ -25,13 +26,13 @@ public class AdministradorDAO {
         try (Connection con = Sql2oDAO.getSql2o().open()) {
             String hashedPassword = BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt());
             con.createQuery(insertSQL)
-                .addParameter("idAdmin", admin.getId_administrador())                
-                .addParameter("nombre", admin.getNombre())
-                .addParameter("apellido", admin.getApellido())
-                .addParameter("email", admin.getEmail())
-                .addParameter("password", hashedPassword) // Almacena la contraseña encriptada
-                .addParameter("rol", admin.getRol())
-                .executeUpdate();
+                    .addParameter("idAdmin", admin.getId_administrador())
+                    .addParameter("nombre", admin.getNombre())
+                    .addParameter("apellido", admin.getApellido())
+                    .addParameter("email", admin.getEmail())
+                    .addParameter("password", hashedPassword) // Almacena la contraseña encriptada
+                    .addParameter("rol", admin.getRol())
+                    .executeUpdate();
             return true;
         } catch (Exception e) {
             System.err.println("Error al registrar el administrador: " + e.getMessage());
@@ -41,11 +42,11 @@ public class AdministradorDAO {
 
     // Método para buscar un administrador por email
     public Optional<Administrador> buscarPorEmail(String email) {
-        String selectSQL = "SELECT * FROM administador WHERE email = :email;";
+        String selectSQL = "SELECT * FROM administrador WHERE email = :email;";
         try (Connection con = Sql2oDAO.getSql2o().open()) {
             Administrador admin = con.createQuery(selectSQL)
-                .addParameter("email", email)
-                .executeAndFetchFirst(Administrador.class);
+                    .addParameter("email", email)
+                    .executeAndFetchFirst(Administrador.class);
             return Optional.ofNullable(admin);
         } catch (Exception e) {
             System.err.println("Error al buscar el administrador: " + e.getMessage());
@@ -62,6 +63,38 @@ public class AdministradorDAO {
         }
         return false; // El administrador no existe o la contraseña es incorrecta
     }
+
+    // Método para modificar un administrador
+    public boolean modificarAdmin(Administrador admin) {
+        String updateSQL = "UPDATE administrador SET nombre = :nombre, apellido = :apellido, email = :email, password = :password, rol = :rol WHERE id_administrador = :idAdmin;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            String hashedPassword = BCrypt.hashpw(admin.getPassword(), BCrypt.gensalt());
+            con.createQuery(updateSQL)
+                    .addParameter("idAdmin", admin.getId_administrador())
+                    .addParameter("nombre", admin.getNombre())
+                    .addParameter("apellido", admin.getApellido())
+                    .addParameter("email", admin.getEmail())
+                    .addParameter("password", hashedPassword) // Almacena la contraseña encriptada
+                    .addParameter("rol", admin.getRol())
+                    .executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al modificar el administrador: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Método para eliminar un administrador
+    public boolean eliminarAdmin(int idAdmin) {
+        String deleteSQL = "DELETE FROM administrador WHERE id_administrador = :idAdmin;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            con.createQuery(deleteSQL)
+                    .addParameter("idAdmin", idAdmin)
+                    .executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error al eliminar el administrador: " + e.getMessage());
+            return false;
+        }
+    }
 }
-
-
