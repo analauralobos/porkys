@@ -4,6 +4,7 @@ import static spark.Spark.*;
 import org.sql2o.Sql2o;
 
 import com.example.Administrador.AdministradorController;
+import com.example.Categoria.CategoriaController;
 import com.example.Cliente.ClienteController;
 import com.example.Compra.CompraController;
 import com.example.Estado.EstadoController;
@@ -127,6 +128,9 @@ public class App {
         delete("porkys/valoracion/eliminar/:id_cliente/:id_producto/:fecha_valoracion",
                 ValoracionController.eliminarValoracion);
 
+        // Categorías
+        get("porkys/categorias/todas", CategoriaController.getTodasCategorias);
+        get("porkys/categorias/:nombre", CategoriaController.getCategoriaPorNombre);
     }
 
     // Método para habilitar CORS
