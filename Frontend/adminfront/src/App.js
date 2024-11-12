@@ -1,4 +1,31 @@
-import React, { useState } from "react";
+import React from 'react'
+import Navbar from './components/NavBar/Navbar'; 
+import { Route, Routes } from 'react-router-dom';
+import Inicio from './pages/inicio/Inicio';
+import Carrito from './pages/carrito/Carrito';
+import Pedidos from './pages/pedidos/Pedidos';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+const App = () => {
+  return (
+    <div className='app'>
+      <Navbar/>
+      <Routes>
+        <Route path='/' element={<Inicio/>} />
+        <Route path='/carrito' element={<Carrito/>} />
+        <Route path='/pedido' element={<Pedidos/>} />
+      </Routes>
+    </div>
+  )
+}
+
+export default App
+
+
+
+
+
+/*import React, { useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
@@ -67,3 +94,4 @@ function App() {
 }
 
 export default App;
+*/
