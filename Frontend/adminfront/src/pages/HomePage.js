@@ -1,22 +1,21 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
 
-function HomePage() {
-  const navigate = useNavigate();
-
-  const handleLoginRedirect = () => {
-    navigate("/login"); 
-  };
-
+function Home({ userRole }) {
+  if (userRole === 'cliente') {
+    return (
+      <div>
+        <h1>Bienvenido, Cliente</h1>
+        <p>Contenido exclusivo para clientes.</p>
+      </div>
+    );
+  }
+  
+  // Si no es cliente, se muestra una bienvenida genérica
   return (
-    <div className="container text-center">
-      <h1>Bienvenido a Porky Cakes</h1>
-      <button className="btn btn-primary" onClick={handleLoginRedirect}>
-        Iniciar Sesión
-      </button>
+    <div>
+      <h1>Bienvenido a la tienda</h1>
     </div>
   );
 }
 
-export default HomePage;
+export default Home;

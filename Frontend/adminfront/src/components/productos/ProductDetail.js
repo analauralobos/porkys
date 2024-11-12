@@ -69,6 +69,9 @@ const ProductDetail = () => {
       alert("Error al actualizar el producto, por favor intenta nuevamente.");
     }
   };
+  const handleCancel = () => {
+    navigate(`/productos`);
+  };
 
   if (loading) {
     return <p>Cargando detalles del producto y receta...</p>;
@@ -110,8 +113,9 @@ const ProductDetail = () => {
             ))}
           </ul>
         </div>
-        <button type="submit">Actualizar Producto</button>
+        <button type="submit">Actualizar Producto</button>        
       </form>
+      <button onClick={() => handleCancel()}>Cancelar</button>
     </div>
   );
 };

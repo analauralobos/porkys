@@ -1,17 +1,12 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-function AdminHomePage({ onLogout }) {
+import React from 'react';
+
+function AdminHomePAge() {
   return (
     <div>
-      <Navbar onLogout={onLogout} />
-      <div>
-        <h3>Panel de Administración</h3>
-        <p>Bienvenido a la administración de Porky Cakes</p>        
-      </div>
-      <Footer />
+      <h1>Panel de Administración</h1>
+      <p>Contenido exclusivo para administradores.</p>
     </div>
   );
 }
 
-export default AdminHomePage;
+export default AdminHomePAge;

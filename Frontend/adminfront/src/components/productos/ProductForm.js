@@ -28,7 +28,9 @@ const ProductForm = () => {
             alert('Error al agregar el producto, por favor intenta nuevamente.');
         }
     };
-
+    const handleCancel = () => {
+        navigate(`/productos`);
+      };
     return (
         <div>
             <h2>Agregar Nuevo Producto</h2>
@@ -70,7 +72,9 @@ const ProductForm = () => {
                 </div>
                 <button type="submit">Agregar Producto</button>
             </form>
+            <button onClick={() => handleCancel()}>Cancelar</button>
         </div>
+        
     );
 };
 

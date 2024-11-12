@@ -1,0 +1,44 @@
+.navbar { 
+    background-color: #f9f5f4;
+    /*padding: 40px 0;  /* Aumenta el tamaño del navbar */
+    height: 100px;;
+  }
+  
+  .navbar-brand {
+    font-family: 'Cursive', sans-serif;
+    font-size: 30px;  
+    
+    color: #ff8484 !important;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #ff8484;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #ffa3a3;
+  }
+  
+  .navbar-nav .nav-link.active {
+    color: #ff9595;
+  }
+  
+  .btn-danger {
+    background-color: #ff8484;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+  }
+  
+  .btn-danger:hover {
+    background-color: #ff9595;
+  }
+  
+  .navbar-nav .nav-item .nav-link {
+    font-size: 1.2rem; 
+  }
+  
+  .navbar-nav .nav-item .nav-link:focus {
+    outline: none;
+  }
+  
