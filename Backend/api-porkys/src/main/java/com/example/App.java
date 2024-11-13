@@ -67,7 +67,7 @@ public class App {
         get("porkys/ingredientes/todos", IngredienteController.getTodosIngredientes);
         get("porkys/ingredientes/detalles/:id", IngredienteController.getIngredienteId);
         post("porkys/ingredientes/crear", IngredienteController.crearIngrediente);
-        delete("porkys/ingredientes/eliminar", IngredienteController.eliminarIngrediente);
+        delete("porkys/ingredientes/eliminar/:idMateriaPrima/:idProducto", IngredienteController.eliminarIngrediente);
         put("porkys/ingredientes/modificar", IngredienteController.modificarIngrediente);
 
         // Materia Prima
@@ -94,7 +94,7 @@ public class App {
         get("porkys/productos/todos", ProductoController.getTodosProductos);
         get("porkys/productos/detalles/:id", ProductoController.getProductoId);
         post("porkys/productos/crear", ProductoController.crearProducto);
-        post("porkys/productos/modificar/:id", ProductoController.modificarProducto);
+        put("porkys/productos/modificar/:id", ProductoController.modificarProducto);
         delete("porkys/productos/eliminar/:id", ProductoController.eliminarProducto);
 
         // ProductosXPedido
@@ -131,6 +131,7 @@ public class App {
         // Categorías
         get("porkys/categorias/todas", CategoriaController.getTodasCategorias);
         get("porkys/categorias/:nombre", CategoriaController.getCategoriaPorNombre);
+        get("porkys/categorias/obtener/:id_categoria", CategoriaController.getCategoriaPorId);
     }
 
     // Método para habilitar CORS

@@ -48,8 +48,8 @@ public class ProductoDAO {
     }
 
     // Método para modificar un producto
-    public boolean modificarProducto(Producto producto) {
-        String updateSQL = "UPDATE producto SET Nombre_Producto = :Nombre_Producto, precio_vta = :precio_vta, cant_porciones = :cant_porciones, descripcion_producto = :descripcion_producto WHERE id_Producto = :id_Producto;";
+    public boolean modificarProducto(int idProducto, Producto producto) {
+        String updateSQL = "UPDATE producto SET Nombre_Producto = :Nombre_Producto, precio_vta = :precio_vta, cant_porciones = :cant_porciones, descripcion_producto = :descripcion_producto, p_categoria = :p_categoria WHERE id_Producto = :id_Producto;";
         try (Connection con = Sql2oDAO.getSql2o().open()) {
             con.createQuery(updateSQL)
                     .addParameter("id_Producto", producto.getId_Producto())
@@ -57,6 +57,7 @@ public class ProductoDAO {
                     .addParameter("precio_vta", producto.getPrecio_vta())
                     .addParameter("cant_porciones", producto.getCant_porciones())
                     .addParameter("descripcion_producto", producto.getDescripcion_producto())
+                    .addParameter("p_categoria", producto.getP_categoria())
                     .executeUpdate();
             return true;
         } catch (Exception e) {
@@ -64,6 +65,8 @@ public class ProductoDAO {
             return false;
         }
     }
+
+
 
     // Método para eliminar un producto
     public boolean eliminarProducto(int id_Producto) {

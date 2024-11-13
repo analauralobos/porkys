@@ -47,14 +47,15 @@ export const updateIngredient = async (id, ingredientData) => {
     throw error;
   }
 };
-
 // Eliminar un ingrediente
-export const deleteIngredient = async (id) => {
+export const deleteIngredient = async (idMateriaPrima, idProducto) => {
   try {
-    const response = await axios.delete(`${API_URL}/eliminar/${id}`);
+    // Pasar los dos valores en la URL
+    const response = await axios.delete(`${API_URL}/eliminar/${idMateriaPrima}/${idProducto}`);
     return response.data;
   } catch (error) {
-    console.error(`Error al eliminar el ingrediente con ID ${id}:`, error);
+    console.error(`Error al eliminar el ingrediente:`, error);
     throw error;
   }
 };
+

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../../services/ProductoService";
 import { useNavigate } from "react-router-dom";
+import './ProductList.css';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -27,35 +28,59 @@ const ProductList = () => {
   };
 
   if (loading) {
-    return <p>Cargando productos...</p>;
+    return <div className="loading">Cargando productos...</div>;
   }
 
   return (
-    <div>
-      <h2>Lista de Productos</h2>
+    <div className="product-list-container">
+      <div className="header">
+        <label>
+          <input className="input"></input>
+        </label>        
+        <button className="add-product-button">Agregar Producto</button>
+      </div>
+
+      
       {products.length === 0 ? (
-        <p>No hay productos disponibles.</p>
+        <p className="no-products-message">No hay productos disponibles.</p>
       ) : (
-        <table>
+        <table className="product-table">
           <thead>
             <tr>
-              <th>Nombre del Producto</th>
-              <th>Precio de Venta</th>
-              <th>Cantidad de Porciones</th>
-              <th>Descripción</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Porciones</th>
+              <th>Categoría</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr
-                key={product.id_Producto}
-                onClick={() => handleProductClick(product.id_Producto)}
-                style={{ cursor: "pointer" }}
-              >
+              <tr key={product.id_Producto}>
                 <td>{product.Nombre_Producto}</td>
                 <td>{product.precio_vta} $</td>
                 <td>{product.cant_porciones}</td>
-                <td>{product.descripcion_producto}</td>
+                <td>{product.p_categoria}</td>
+                <td>
+                  <button
+                    className="action-button edit"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/edit-product/${product.id_Producto}`);
+                    }}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="action-button delete"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      alert(`Eliminar producto ${product.Nombre_Producto}`);
+                    }}
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

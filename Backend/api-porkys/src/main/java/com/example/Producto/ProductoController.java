@@ -59,23 +59,27 @@ public class ProductoController {
         }
     };
 
-    // Modificar un producto
     public static Route modificarProducto = (Request request, Response response) -> {
         response.type("application/json");
         try {
-            Producto productoModificado = gson.fromJson(request.body(), Producto.class);
-            if (productoDAO.modificarProducto(productoModificado)) {
+            int idProducto = Integer.parseInt(request.params(":id")); // Obtener el id de la URL
+            Producto producto = gson.fromJson(request.body(), Producto.class); // Obtener los datos del producto desde el body
+    
+            boolean actualizado = productoDAO.modificarProducto(idProducto, producto);
+    
+            if (actualizado) {
                 response.status(200);
-                return gson.toJson(productoModificado);
+                return gson.toJson("Producto actualizado con éxito.");
             } else {
-                response.status(404);
-                return gson.toJson("Producto no encontrado");
+                response.status(400);
+                return gson.toJson("No se pudo actualizar el producto.");
             }
         } catch (Exception e) {
             response.status(500);
-            return gson.toJson("Error al modificar el producto: " + e.getMessage());
+            return gson.toJson("Error al actualizar producto: " + e.getMessage());
         }
     };
+    
 
     // Eliminar un producto
     public static Route eliminarProducto = (Request request, Response response) -> {
