@@ -132,6 +132,53 @@ li {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   }
   
+/* Estilo para el overlay del modal */
+.login-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    transition: opacity 0.3s ease; 
+}
+
+/* Estilo para el contenido del modal */
+.login-modal {
+    background-color:#ffe1e1;
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Card para centrar el contenido */
+.login-card {
+    width: 100%;
+    max-width: 300px;
+    height: 350px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background: white;
+}
+
+/* Fondo con gradiente difuminado */
+.login-container {
+    min-height: 85vh;
+    background: linear-gradient(135deg, #ffc4c4, #ff8484);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+ 
   /* Media queries para pantallas pequeñas */
   @media (max-width: 768px) {
     .navbar-menu {
@@ -145,7 +192,7 @@ li {
     }
   
     .navbar-right {
-      display: none; /* Opcional: Ocultar elementos secundarios en pantallas pequeñas */
+      display: none; 
     }
   }
   
