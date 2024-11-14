@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom'; // Importa Link aquí
+import { Link } from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi"; 
@@ -13,8 +13,17 @@ const Navbar = ({ userRole, setUserRole }) => {
   const [showLoginModal, setShowLoginModal] = useState(false); // Estado para controlar el modal de login
   const navigate = useNavigate();
 
+  // Leer el estado de localStorage cuando el componente se monta
+  useEffect(() => {
+    const storedRole = localStorage.getItem('userRole');
+    if (storedRole) {
+      setUserRole(storedRole); // Restaurar el estado de userRole desde localStorage
+    }
+  }, [setUserRole]);
+
   const handleLogout = () => {
     setUserRole(null);
+    localStorage.removeItem('userRole'); // Eliminar el userRole de localStorage al cerrar sesión
     navigate('/');
   };
 
@@ -25,6 +34,12 @@ const Navbar = ({ userRole, setUserRole }) => {
 
   const openLoginModal = () => setShowLoginModal(true); // Abre el modal de login
   const closeLoginModal = () => setShowLoginModal(false); // Cierra el modal de login
+
+  const handleLogin = (role) => {
+    localStorage.setItem('userRole', role); // Guardar el userRole en localStorage
+    setUserRole(role); // Establecer el userRole en el estado
+    closeLoginModal(); // Cerrar el modal de login
+  };
 
   return (
     <div className="navbar">
@@ -65,7 +80,7 @@ const Navbar = ({ userRole, setUserRole }) => {
         )}
       </div>
 
-      {showLoginModal && <Login closeModal={closeLoginModal} setUserRole={setUserRole} />} {/* Mostrar modal si showLoginModal es true */}
+      {showLoginModal && <Login closeModal={closeLoginModal} handleLogin={handleLogin} />} {/* Mostrar modal si showLoginModal es true */}
     </div>
   );
 };

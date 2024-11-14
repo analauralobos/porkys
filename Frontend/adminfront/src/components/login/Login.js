@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-function Login({ closeModal, setUserRole }) {
+function Login({ closeModal, handleLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSubmit = async () => {
     try {
       const response = await fetch('http://localhost:4567/porkys/login', {
         method: 'POST',
@@ -20,11 +20,13 @@ function Login({ closeModal, setUserRole }) {
       const data = await response.json();
 
       if (response.status === 200) {
-        setUserRole(data.role);
+        // Aquí estamos usando la función handleLogin pasada como prop
+        handleLogin(data.role); // Pasa el rol recibido para guardarlo
+        closeModal(); // Cierra el modal de login
         if (data.role === 'admin') {
-          navigate('/paneladmin');
+          navigate('/paneladmin'); // Redirige al panel de admin si es un admin
         } else if (data.role === 'cliente') {
-          navigate('/');
+          navigate('/'); // Redirige al inicio si es un cliente
         }
       } else {
         alert(data.message || 'Credenciales inválidas');
@@ -60,7 +62,7 @@ function Login({ closeModal, setUserRole }) {
               />
             </div>
           </div>
-          <button className="btn-pink" onClick={handleLogin}>
+          <button className="btn-pink" onClick={handleSubmit}>
             Iniciar sesión
           </button>
         </div>
