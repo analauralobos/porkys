@@ -3,6 +3,7 @@ package com.example.TipoMateriaPrima;
 import java.util.List;
 
 import org.sql2o.Connection;
+
 import com.example.db.Sql2oDAO;
 
 public class TipoMateriaPrimaDAO {
@@ -16,6 +17,21 @@ public class TipoMateriaPrimaDAO {
             return null;
         }
     }
+
+// Método para seleccionar una mp por id
+    public TipoMateriaPrima selectMPId(int id_TipoMP) {
+        String selectSQL = "SELECT * FROM tipo_materiaprima WHERE id_TipoMP = :id_TipoMP;";
+        try (Connection con = Sql2oDAO.getSql2o().open()) {
+            TipoMateriaPrima materiaPrima = con.createQuery(selectSQL)
+                    .addParameter("id_TipoMP", id_TipoMP)
+                    .executeAndFetchFirst(TipoMateriaPrima.class); // Cambiado a executeAndFetchFirst
+            return materiaPrima;
+        } catch (Exception e) {
+            System.err.println("Error al seleccionar la materia prima: " + e.getMessage());
+            return null;
+        }
+    }
+
 
     // Método para crear un nuevo tipo de materia prima
     public boolean crearTipoMateriaPrima(TipoMateriaPrima tipoMP) {

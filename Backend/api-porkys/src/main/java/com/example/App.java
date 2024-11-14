@@ -111,6 +111,7 @@ public class App {
 
         // Tipo MP
         get("porkys/tipomp/todos", TipoMateriaPrimaController.getTodosTipoMP);
+        get("porkys/tipomp/detalles/:id", TipoMateriaPrimaController.getTodosTipoMPID);
         post("porkys/tipomp/crear", TipoMateriaPrimaController.crearTipoMateriaPrima);
         post("porkys/tipomp/modificar/:id", TipoMateriaPrimaController.modificarTipoMateriaPrima);
         delete("porkys/tipomp/eliminar/:id", TipoMateriaPrimaController.eliminarTipoMateriaPrima);

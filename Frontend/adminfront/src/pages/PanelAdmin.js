@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './PanelAdmin.css';
 import ProductList from '../components/productos/ProductList'
+import MateriaPrimaList from '../components/materiaprima/MateriaPrimaList'
 const PanelAdmin = () => {
   const [selectedSection, setSelectedSection] = useState('Productos');
 
@@ -9,7 +10,7 @@ const PanelAdmin = () => {
       case 'Productos':
         return <div><ProductList/></div>;
       case 'Stock':
-        return <div>Gestión de stock</div>;
+        return <div><MateriaPrimaList/></div>;
       case 'Recetas':
         return <div>Gestión de recetas</div>;
       case 'Pedidos':

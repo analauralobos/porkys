@@ -1,6 +1,7 @@
 package com.example.TipoMateriaPrima;
 
 import java.util.List;
+
 import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
@@ -21,6 +22,32 @@ public class TipoMateriaPrimaController {
             return new Gson().toJson("Error controlador: " + e.getMessage());
         }
     };
+
+        // Ver materia prima por id de materia prima
+    public static Route getTodosTipoMPID = (Request request, Response response) -> {
+        response.type("application/json");
+        try {
+            int idMP = Integer.parseInt(request.params(":id"));
+            TipoMateriaPrima materiaPrima = tipoMateriaPrimaDAO.selectMPId(idMP);
+
+            if (materiaPrima != null) {
+                response.status(200);
+                return gson.toJson(materiaPrima);
+            } else {
+                response.status(404);
+                return gson.toJson("No se encontró una materia prima para el ID especificado.");
+            }
+        } catch (NumberFormatException e) {
+            response.status(400);
+            return gson.toJson("ID de materia prima inválido");
+        } catch (Exception e) {
+            response.status(500);
+            return gson.toJson("Error al obtener la materia prima: " + e.getMessage());
+        }
+    };
+
+
+
 
     // Crear nuevo tipo de materia prima
     public static Route crearTipoMateriaPrima = (request, response) -> {
